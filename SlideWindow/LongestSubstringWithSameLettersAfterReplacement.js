@@ -14,7 +14,7 @@
 // Output: 3
 // Explanation: Replace the 'b' or 'd' with 'c' to have the longest repeating substring "ccc"
 
-function lengthOfLongestSubstring(str, k) {
+function LongestSubstringWithSameLettersAfterReplacement(str, k) {
   let windowStart = 0,
     longest = 0,
     longestRepeating = 0,
@@ -25,13 +25,13 @@ function lengthOfLongestSubstring(str, k) {
     if (!(rightChar in charFrequency)) {
       charFrequency[rightChar] = 0;
     }
-    charFrequency[rightChar] += 1;
+    charFrequency[rightChar]++;
     longestRepeating = Math.max(longestRepeating, charFrequency[rightChar]);
 
     if (windowEnd - windowStart + 1 - longestRepeating > k) {
       leftChar = str[windowStart];
-      charFrequency[leftChar] -= 1;
-      windowStart += 1;
+      charFrequency[leftChar]--;
+      windowStart++;
     }
 
     longest = Math.max(longest, windowEnd - windowStart + 1);
@@ -39,6 +39,6 @@ function lengthOfLongestSubstring(str, k) {
   return longest;
 }
 
-console.log(length_of_longest_substring("aabccbb", 2));
-console.log(length_of_longest_substring("abbcb", 1));
-console.log(length_of_longest_substring("abccde", 1));
+console.log(LongestSubstringWithSameLettersAfterReplacement("aabccbb", 2));
+console.log(LongestSubstringWithSameLettersAfterReplacement("abbcb", 1));
+console.log(LongestSubstringWithSameLettersAfterReplacement("abccde", 1));

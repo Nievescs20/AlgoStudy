@@ -12,22 +12,20 @@
 
 const longestSubarrayWithOnesAfterReplacement = function (arr, k) {
   let longest = 0;
-  let left = 0;
-  let numFrequency = {};
+  let windowStart = 0;
+  let maxOnes = 0;
 
-  for (let right = 0; right < arr.length; right++) {
-    let rightNum = arr[right];
-    if (!(rightNum in numFrequency)) {
-      numFrequency[rightNum] = 0;
+  for (let windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+    if (arr[windowEnd] === 1) {
+      maxOnes++;
     }
-    numFrequency[rightNum]++;
-
-    if (right - left + 1 - numFrequency[1] > k) {
-      let leftNum = arr[left];
-      numFrequency[leftNum]--;
-      left++;
+    if (windowEnd - windowStart + 1 - maxOnes > k) {
+      if (arr[windowStart] === 1) {
+        maxOnes--;
+      }
+      windowStart++;
     }
-    longest = Math.max(longest, right - left + 1);
+    longest = Math.max(longest, windowEnd - windowStart + 1);
   }
   return longest;
 };
